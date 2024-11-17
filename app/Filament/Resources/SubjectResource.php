@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\SubjectResource\Pages;
 use App\Filament\Resources\SubjectResource\RelationManagers;
+use App\Filament\Resources\SubjectResource\RelationManagers\CategoriesRelationManager;
 use App\Filament\Resources\SubjectResource\RelationManagers\LecturesRelationManager;
 use App\Models\Subject;
 use Filament;
@@ -26,6 +27,7 @@ class SubjectResource extends Resource
         return $form
             ->schema([
                 Filament\Forms\Components\TextInput::make('name')
+                    ->columnSpanFull()
             ]);
     }
 
@@ -51,7 +53,7 @@ class SubjectResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            CategoriesRelationManager::class,
         ];
     }
 

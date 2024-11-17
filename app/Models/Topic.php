@@ -17,6 +17,7 @@ class Topic extends Model
      */
     protected $fillable = [
         'name',
+        'lecture_id',
     ];
 
     /**
@@ -26,6 +27,7 @@ class Topic extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'lecture_id' => 'integer',
     ];
 
     public function lecture(): BelongsTo

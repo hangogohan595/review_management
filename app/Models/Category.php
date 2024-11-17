@@ -18,6 +18,7 @@ class Category extends Model
      */
     protected $fillable = [
         'name',
+        'subject_id'
     ];
 
     /**
@@ -27,6 +28,7 @@ class Category extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'subject_id' => 'integer',
     ];
 
     public function lectures(): HasMany

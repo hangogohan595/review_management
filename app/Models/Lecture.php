@@ -23,7 +23,7 @@ class Lecture extends Model
         'pdf_password',
         'is_unlocked',
         'status',
-        'subject_id',
+        'category_id',
     ];
 
     /**
@@ -34,7 +34,7 @@ class Lecture extends Model
     protected $casts = [
         'id' => 'integer',
         'is_unlocked' => 'boolean',
-        'subject_id' => 'integer',
+        'category_id' => 'integer',
     ];
 
     public function topics(): HasMany
