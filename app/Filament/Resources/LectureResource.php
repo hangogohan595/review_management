@@ -22,7 +22,7 @@ class LectureResource extends Resource
 {
     protected static ?string $model = Lecture::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-pencil-square';
 
     public static function form(Form $form): Form
     {
@@ -86,17 +86,21 @@ class LectureResource extends Resource
         return $table
             ->columns([
                 Filament\Tables\Columns\TextColumn::make('category.name')
-                    ->label('Category'),
+                    ->label('Category')
+                    ->sortable()
+                    ->searchable(),
                 Filament\Tables\Columns\TextColumn::make('name')
-                    ->label('Lecture Name'),
+                    ->label('Lecture Name')
+                    ->sortable()
+                    ->searchable(),
                 Filament\Tables\Columns\TextColumn::make('link_video')
                     ->label('Link Video')
                     ->url(fn(Model $record): string => $record->link_video, true)
-                    ->limit(30),
+                    ->limit(20),
                 Filament\Tables\Columns\TextColumn::make('link_pdf')
                     ->label('Link PDF')
                     ->url(fn(Model $record): string => $record->link_pdf, true)
-                    ->limit(30),
+                    ->limit(20),
                 Filament\Tables\Columns\TextColumn::make('pdf_password')
                     ->label('PDF Password'),
                 Filament\Tables\Columns\TextColumn::make('is_unlocked')
@@ -112,13 +116,13 @@ class LectureResource extends Resource
                 Tables\Filters\SelectFilter::make('category')
                     ->relationship('category', 'name')
                     ->searchable()
-                    ->multiple()
-                    ->preload(),
+                    ->preload()
+                    ->multiple(),
                 Tables\Filters\SelectFilter::make('topics')
                     ->relationship('topics', 'name')
                     ->searchable()
-                    ->multiple()
-                    ->preload(),
+                    ->preload()
+                    ->multiple(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

@@ -32,9 +32,8 @@ class CategoriesRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Category')
                     ->url(fn(Category $record): string => route('filament.admin.resources.lectures.index', [
-                        'tableFilters[category][value]' => $record->id
+                        'tableFilters[category][values]' => [$record->id, 1],
                     ])),
             ])
             ->filters([

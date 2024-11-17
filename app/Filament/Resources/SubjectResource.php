@@ -20,14 +20,18 @@ class SubjectResource extends Resource
 {
     protected static ?string $model = Subject::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Filament\Forms\Components\TextInput::make('name')
-                    ->columnSpanFull()
+                Filament\Forms\Components\Section::make('')
+                    ->schema([
+                        Filament\Forms\Components\TextInput::make('name')
+                            ->columnSpanFull(),
+                    ]),
+
             ]);
     }
 
