@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Category;
 use App\Models\Subject;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -12,15 +11,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('lectures', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Category::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Subject::class)->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->string('link_video')->nullable();
-            $table->string('link_pdf')->nullable();
-            $table->string('pdf_password')->nullable();
-            $table->boolean('is_unlocked');
-            $table->string('status');
             $table->timestamps();
         });
     }
@@ -30,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('lectures');
+        Schema::dropIfExists('categories');
     }
 };

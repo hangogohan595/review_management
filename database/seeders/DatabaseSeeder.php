@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Subject;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -18,6 +19,23 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+            'password' => bcrypt('test'),
+        ]);
+
+        Subject::create([
+            'name' => 'Math',
+        ]);
+
+        Subject::create([
+            'name' => 'ELEX',
+        ]);
+
+        Subject::create([
+            'name' => 'GEAS',
+        ]);
+
+        Subject::create([
+            'name' => 'ESAT',
         ]);
     }
 }

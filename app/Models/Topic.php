@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Lecture extends Model
+class Topic extends Model
 {
+    /** @use HasFactory<\Database\Factories\TopicFactory> */
     use HasFactory;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -18,12 +17,6 @@ class Lecture extends Model
      */
     protected $fillable = [
         'name',
-        'link_video',
-        'link_pdf',
-        'pdf_password',
-        'is_unlocked',
-        'status',
-        'subject_id',
     ];
 
     /**
@@ -33,17 +26,10 @@ class Lecture extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'is_unlocked' => 'boolean',
-        'subject_id' => 'integer',
     ];
 
-    public function topics(): HasMany
+    public function lecture(): BelongsTo
     {
-        return $this->hasMany(Topic::class);
-    }
-
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Lecture::class);
     }
 }
