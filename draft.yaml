@@ -1,0 +1,13 @@
+models:
+  Subject:
+    name: string
+
+  Lecture:
+    name: string
+    link_video: string
+    link_pdf: string
+    pdf_password: string
+    is_unlocked: boolean
+    status: string
+    relationships:
+      belongsTo: Subject

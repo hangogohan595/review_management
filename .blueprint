@@ -1,0 +1,11 @@
+created:
+    - database/factories/SubjectFactory.php
+    - database/factories/LectureFactory.php
+    - database/migrations/2024_11_17_141737_create_subjects_table.php
+    - database/migrations/2024_11_17_141738_create_lectures_table.php
+    - app/Models/Subject.php
+    - app/Models/Lecture.php
+models:
+    User: { name: string, email: string, email_verified_at: 'datetime nullable', password: string, remember_token: 'string nullable' }
+    Subject: { name: string }
+    Lecture: { name: string, link_video: string, link_pdf: string, pdf_password: string, is_unlocked: boolean, status: string, relationships: { belongsTo: Subject } }
