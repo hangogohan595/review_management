@@ -95,9 +95,11 @@ class LectureResource extends Resource
                                     ->label('Lecture Name')
                                     ->required(),
                                 Filament\Forms\Components\TextInput::make('link_video')
-                                    ->label('Lecture Link'),
+                                    ->label('Lecture Link')
+                                    ->url(),
                                 Filament\Forms\Components\TextInput::make('link_pdf')
-                                    ->label('Lecture PDF'),
+                                    ->label('Lecture PDF')
+                                    ->url(),
                                 Filament\Forms\Components\TextInput::make('pdf_password')
                                     ->label('Lecture Password'),
                             ])
