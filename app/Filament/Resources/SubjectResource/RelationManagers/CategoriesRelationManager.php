@@ -40,7 +40,8 @@ class CategoriesRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()
+                    ->label('New'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

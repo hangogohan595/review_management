@@ -9,6 +9,7 @@ use App\LectureStatus;
 use App\Models\Category;
 use App\Models\Lecture;
 use App\Models\Subject;
+use App\Models\Topic;
 use Filament;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -43,12 +44,6 @@ class LectureResource extends Resource
                                     ->afterStateUpdated(fn($set) => $set('category_id', null)),
                                 Filament\Forms\Components\Select::make('category_id')
                                     ->label('Lecture Category')
-                                    ->options(function ($get) {
-                                        $categories = empty($get('subject_id'))
-                                            ? Category::all()
-                                            : Category::where('subject_id', $get('subject_id'))->get();
-                                        return $categories->pluck('name', 'id');
-                                    })
                                     ->createOptionForm(function ($get) {
                                         return [
                                             Forms\Components\Hidden::make('subject_id')
@@ -57,25 +52,40 @@ class LectureResource extends Resource
                                                 ->required()
                                         ];
                                     })
+                                    ->createOptionUsing(function (array $data) {
+                                        return Category::create($data)->id;
+                                    })
                                     ->createOptionAction(fn($action) => $action->disabled(fn($get) => !$get('subject_id')))
+                                    ->options(function ($get) {
+                                        $categories = empty($get('subject_id'))
+                                            ? Category::all()
+                                            : Category::where('subject_id', $get('subject_id'))->get();
+                                        return $categories->pluck('name', 'id');
+                                    })
                                     ->preload()
                                     ->searchable()
                                     ->live()
                                     ->required()
                                     ->afterStateUpdated(function ($set, $get, $state) {
-                                        if (is_null($get('subject_id'))) {
+                                        if (empty($get('subject_id'))) {
                                             $set('subject_id', Category::find($state)->subject_id);
                                         }
                                     }),
                                 Filament\Forms\Components\Select::make('topics')
                                     ->multiple()
                                     ->relationship('topics', 'name')
-                                    ->createOptionForm([
-                                        Forms\Components\Hidden::make('lecture_id')
-                                            ->default(fn($record) => $record ? $record->id : Lecture::max('id') + 1),
-                                        Forms\Components\TextInput::make('name')
-                                            ->required()
-                                    ])
+                                    ->createOptionForm(function ($record) {
+                                        return [
+                                            Forms\Components\Hidden::make('lecture_id')
+                                                ->default($record->id),
+                                            Forms\Components\TextInput::make('name')
+                                                ->required()
+                                        ];
+                                    })
+                                    ->createOptionUsing(function (array $data) {
+                                        return Topic::create($data)->id;
+                                    })
+                                    ->createOptionAction(fn($action) => $action->disabled(fn($record) => is_null($record)))
                                     ->preload()
                                     ->searchable()
                             ]),
