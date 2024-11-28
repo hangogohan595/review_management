@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Subject::create([
-            'name' => 'Math',
+            'name' => 'MATH',
         ]);
 
         Subject::create([

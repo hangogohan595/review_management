@@ -24,6 +24,7 @@ class Lecture extends Model
         'is_unlocked',
         'status',
         'category_id',
+        'subject_id',
     ];
 
     /**
@@ -42,8 +43,18 @@ class Lecture extends Model
         return $this->hasMany(Topic::class);
     }
 
+    public function subject(): BelongsTo
+    {
+        return $this->belongsTo(Subject::class);
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function takeHomeExam(): HasMany
+    {
+        return $this->hasMany(TakeHomeExam::class);
     }
 }
