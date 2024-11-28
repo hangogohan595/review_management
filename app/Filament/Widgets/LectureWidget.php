@@ -16,7 +16,7 @@ class LectureWidget extends BaseWidget
             Stat::make('Unwatched', 'Qty: ' . Lecture::where('status', 'PENDING')->count())
                 ->description("Lectures you haven't watched"),
             Stat::make('Watched', 'Qty: ' . Lecture::where('status', 'COMPLETED')->count())
-                ->description("Lectures you haven watched"),
+                ->description("Lectures you have watched"),
         ];
     }
 }
